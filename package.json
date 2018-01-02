@@ -1,0 +1,11 @@
+{
+  "name": "stylelint-codeframe-formatter",
+  "version": "1.0.0",
+  "description": "Stylelint formatter using babel code frame",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bencergazda",
+  "license": "MIT"
+}
