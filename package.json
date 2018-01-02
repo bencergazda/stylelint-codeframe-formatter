@@ -4,8 +4,28 @@
   "description": "Stylelint formatter using babel code frame",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint index.js"
   },
   "author": "bencergazda",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bencergazda/stylelint-codeframe-formatter.git"
+  },
+  "keywords": [
+    "stylelint"
+  ],
+  "bugs": {
+    "url": "https://github.com/bencergazda/stylelint-codeframe-formatter/issues"
+  },
+  "homepage": "https://github.com/bencergazda/stylelint-codeframe-formatter#readme",
+  "dependencies": {
+    "babel-code-frame": "^6.26.0",
+    "chalk": "^2.3.0",
+    "log-symbols": "^2.1.0",
+    "plur": "^2.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0"
+  }
 }

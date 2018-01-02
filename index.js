@@ -19,8 +19,7 @@ module.exports = function (results) {
 		const fileContent = fs.readFileSync(result.source, 'utf8');
 
 		const messagesOutput = result.warnings.map(function(warning) {
-		    // warning.rule is appended to warning.text (wrapped in parentheses). We remove the appended text so
-			const ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) );
+			const ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
 			const ruleId = chalk.dim(`(${warning.rule})`);
 
 			let symbol;
