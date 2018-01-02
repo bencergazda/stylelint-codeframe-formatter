@@ -1,8 +1,8 @@
 # stylelint-codeframe-formatter
 
 [![npm version](https://badge.fury.io/js/stylelint-codeframe-formatter.svg)](http://badge.fury.io/js/sass-extract)
-[![dependencies Status](https://david-dm.org/bencergazda/stylelint-codeframe-formatter/status.svg)](https://david-dm.org/jgranstrom/sass-extract)
-[![devDependencies Status](https://david-dm.org/bencergazda/stylelint-codeframe-formatter/dev-status.svg)](https://david-dm.org/jgranstrom/sass-extract?type=dev)
+[![dependencies Status](https://david-dm.org/bencergazda/stylelint-codeframe-formatter/status.svg)](https://david-dm.org/bencergazda/stylelint-codeframe-formatter)
+[![devDependencies Status](https://david-dm.org/bencergazda/stylelint-codeframe-formatter/dev-status.svg)](https://david-dm.org/bencergazda/stylelint-codeframe-formatter?type=dev)
 
 [Stylelint](https://stylelint.io/) formatter using [babel-code-frame](https://www.npmjs.com/package/babel-code-frame) to show the piece of code where the errors and warnings are.
 
@@ -25,7 +25,7 @@ webpack.config.js
 module.exports = {
     plugins: [
         new StylelintPlugin({
-            formatter: require('stylelint-codeframe-formatter')
+            formatter: require('stylelint-codeframe-formatter'),
             ...
         })
     ],
@@ -59,6 +59,5 @@ Any ideas how to pass the module name to CLI?
 
 ## License
 
-MIT © [Benedek Káldi](http://bencergazda.hu)
-
+MIT © [Benedek Káldi](http://bencergazda.hu)<br/>
 Heavily based on [Adrien Antoine](https://adriantoine.com)'s [eslint-codeframe-formatter](https://github.com/adriantoine/eslint-codeframe-formatter)
