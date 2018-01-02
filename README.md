@@ -1,6 +1,6 @@
 # stylelint-codeframe-formatter
 
-[![npm version](https://badge.fury.io/js/stylelint-codeframe-formatter.svg)](http://badge.fury.io/js/sass-extract)
+[![npm version](https://badge.fury.io/js/stylelint-codeframe-formatter.svg)](http://badge.fury.io/js/stylelint-codeframe-formatter)
 [![dependencies Status](https://david-dm.org/bencergazda/stylelint-codeframe-formatter/status.svg)](https://david-dm.org/bencergazda/stylelint-codeframe-formatter)
 [![devDependencies Status](https://david-dm.org/bencergazda/stylelint-codeframe-formatter/dev-status.svg)](https://david-dm.org/bencergazda/stylelint-codeframe-formatter?type=dev)
 
