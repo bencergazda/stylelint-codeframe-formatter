@@ -17,6 +17,12 @@ $ npm install stylelint-codeframe-formatter --save-dev
 
 ## Usage
 
+### Stylelint CLI
+
+```
+$ stylelint --custom-formatter node_modules/stylelint-codeframe-formatter file.css
+```
+
 ### [stylelint-webpack-plugin](https://github.com/JaKXz/stylelint-webpack-plugin/)
 
 webpack.config.js
@@ -52,10 +58,6 @@ module.exports = function(grunt) {
     });
 };
 ```
-
-### Stylelint CLI
-
-Any ideas how to pass the module name to CLI?
 
 ## License
 
