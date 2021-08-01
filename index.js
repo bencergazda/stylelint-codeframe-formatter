@@ -18,7 +18,7 @@ module.exports = function(results) {
 
 		let returnData = '';
 
-		// Collecting Styelint configuration warnings (we need it only once, but they are listed in the file-level, this is why we are checking resultIndex)
+		// Collecting Stylelint configuration warnings (we need it only once, but they are listed in the file-level, this is why we are checking resultIndex)
 		if (resultIndex === 0) {
 			const invalidOptionWarningsOutput = result.invalidOptionWarnings.map(function(invalidOptionWarning) {
 				invalidOptionWarningCount++;
@@ -33,7 +33,7 @@ module.exports = function(results) {
 		const fileContent = fs.readFileSync(result.source, 'utf8');
 
 		const messagesOutput = result.warnings.map(function(warning) {
-			const ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
+			let ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
 			const ruleId = chalk.dim(`(${warning.rule})`);
 
 			let symbol;
@@ -43,6 +43,7 @@ module.exports = function(results) {
 			} else if (warning.severity === 'error') {
 				symbol = logSymbols.error;
 				errorCount++
+				ruleText = chalk.red(`${warning.text}\n`)
 			}
 
 			return [
