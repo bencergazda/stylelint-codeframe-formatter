@@ -5,7 +5,7 @@ const path = require('path');
 const chalk = require('chalk');
 const plur = require('plur');
 const logSymbols = require('log-symbols');
-const codeFrame = require('babel-code-frame');
+const { codeFrameColumns } = require('@babel/code-frame');
 
 module.exports = function(results) {
 	if (!results || !results.length) return '';
@@ -46,9 +46,16 @@ module.exports = function(results) {
 				ruleText = chalk.red(`${warning.text}\n`)
 			}
 
+			const location = {
+				start: {
+					column: warning.column,
+					line: warning.line
+				}
+			};
+
 			return [
 				`  ${symbol} ${ruleText} ${ruleId}`,
-				`${codeFrame(fileContent, warning.line, warning.column, { highlightCode: false })}` // TODO disable syntax error highlighting
+				`${codeFrameColumns(fileContent, location, { highlightCode: true })}` // TODO disable syntax error highlighting
 			].join('\n')
 		});
 

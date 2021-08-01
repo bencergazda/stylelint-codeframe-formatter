@@ -22,12 +22,13 @@
   },
   "homepage": "https://github.com/bencergazda/stylelint-codeframe-formatter#readme",
   "dependencies": {
-    "babel-code-frame": "^6.26.0",
+    "@babel/code-frame": "^7.14.5",
     "chalk": "^2.4.2",
     "log-symbols": "^2.2.0",
     "plur": "^2.1.2"
   },
   "devDependencies": {
+    "@types/babel__code-frame": "^7.0.3",
     "eslint": "^4.19.1"
   }
 }
