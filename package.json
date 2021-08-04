@@ -4,7 +4,8 @@
   "description": "Stylelint formatter using babel code frame",
   "main": "index.js",
   "scripts": {
-    "test": "eslint index.js"
+    "eslint": "eslint index.js",
+    "test:cli": "stylelint --custom-formatter ./index.js ./tests/styles.css"
   },
   "author": "bencergazda",
   "license": "MIT",
@@ -29,6 +30,9 @@
   },
   "devDependencies": {
     "@types/babel__code-frame": "^7.0.3",
-    "eslint": "^4.19.1"
+    "eslint": "^4.19.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-webpack-plugin": "^2.2.2"
   }
 }
