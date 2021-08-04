@@ -1,6 +1,6 @@
 {
   "name": "stylelint-codeframe-formatter",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Stylelint formatter using babel code frame",
   "main": "index.js",
   "scripts": {
@@ -13,19 +13,22 @@
     "url": "git+https://github.com/bencergazda/stylelint-codeframe-formatter.git"
   },
   "keywords": [
-    "stylelint"
+    "stylelint",
+    "formatter",
+    "codeframe"
   ],
   "bugs": {
     "url": "https://github.com/bencergazda/stylelint-codeframe-formatter/issues"
   },
   "homepage": "https://github.com/bencergazda/stylelint-codeframe-formatter#readme",
   "dependencies": {
-    "babel-code-frame": "^6.26.0",
-    "chalk": "^2.3.0",
-    "log-symbols": "^2.1.0",
+    "@babel/code-frame": "^7.14.5",
+    "chalk": "^2.4.2",
+    "log-symbols": "^2.2.0",
     "plur": "^2.1.2"
   },
   "devDependencies": {
-    "eslint": "^4.14.0"
+    "@types/babel__code-frame": "^7.0.3",
+    "eslint": "^4.19.1"
   }
 }

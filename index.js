@@ -5,7 +5,7 @@ const path = require('path');
 const chalk = require('chalk');
 const plur = require('plur');
 const logSymbols = require('log-symbols');
-const codeFrame = require('babel-code-frame');
+const { codeFrameColumns } = require('@babel/code-frame');
 
 module.exports = function(results) {
 	if (!results || !results.length) return '';
@@ -18,7 +18,7 @@ module.exports = function(results) {
 
 		let returnData = '';
 
-		// Collecting Styelint configuration warnings (we need it only once, but they are listed in the file-level, this is why we are checking resultIndex)
+		// Collecting Stylelint configuration warnings (we need it only once, but they are listed in the file-level, this is why we are checking resultIndex)
 		if (resultIndex === 0) {
 			const invalidOptionWarningsOutput = result.invalidOptionWarnings.map(function(invalidOptionWarning) {
 				invalidOptionWarningCount++;
@@ -33,7 +33,7 @@ module.exports = function(results) {
 		const fileContent = fs.readFileSync(result.source, 'utf8');
 
 		const messagesOutput = result.warnings.map(function(warning) {
-			const ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
+			let ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
 			const ruleId = chalk.dim(`(${warning.rule})`);
 
 			let symbol;
@@ -43,11 +43,19 @@ module.exports = function(results) {
 			} else if (warning.severity === 'error') {
 				symbol = logSymbols.error;
 				errorCount++
+				ruleText = chalk.red(`${warning.text}\n`)
 			}
+
+			const location = {
+				start: {
+					column: warning.column,
+					line: warning.line
+				}
+			};
 
 			return [
 				`  ${symbol} ${ruleText} ${ruleId}`,
-				`${codeFrame(fileContent, warning.line, warning.column, { highlightCode: false })}` // TODO disable syntax error highlighting
+				`${codeFrameColumns(fileContent, location, { highlightCode: true })}` // TODO disable syntax error highlighting
 			].join('\n')
 		});
 
