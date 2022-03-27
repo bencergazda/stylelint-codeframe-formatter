@@ -25,9 +25,9 @@
   "homepage": "https://github.com/bencergazda/stylelint-codeframe-formatter#readme",
   "dependencies": {
     "@babel/code-frame": "^7.16.7",
-    "chalk": "^2.4.2",
-    "log-symbols": "^2.2.0",
-    "plur": "^2.1.2"
+    "chalk": "^4.1.2",
+    "log-symbols": "^4.1.0",
+    "plur": "^4.0.0"
   },
   "devDependencies": {
     "@types/babel__code-frame": "^7.0.3",
