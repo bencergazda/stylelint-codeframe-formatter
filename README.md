@@ -20,7 +20,7 @@ $ npm install stylelint-codeframe-formatter --save-dev
 ### Stylelint CLI
 
 ```
-$ stylelint --custom-formatter node_modules/stylelint-codeframe-formatter file.css
+$ stylelint --custom-formatter stylelint-codeframe-formatter file.css
 ```
 
 ### [stylelint-webpack-plugin](https://github.com/JaKXz/stylelint-webpack-plugin/)
