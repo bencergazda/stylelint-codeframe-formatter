@@ -53,6 +53,13 @@ module.exports = function(results) {
 				}
 			};
 
+			if (typeof warning.endColumn === 'number' && typeof warning.endLine === 'number') {
+				location.end = {
+					column: warning.endColumn,
+					line: warning.endLine
+				};
+			}
+
 			return [
 				`  ${symbol} ${ruleText} ${ruleId}`,
 				`${codeFrameColumns(fileContent, location, { highlightCode: true })}` // TODO disable syntax error highlighting
