@@ -34,17 +34,19 @@ module.exports = function(results) {
 
 		const messagesOutput = result.warnings.map(function(warning) {
 			let ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
-			const ruleId = chalk.dim(`(${warning.rule})`);
+			const warningRuleInParentheses = `(${warning.rule})`
+      const shouldOmitRuleId = warning.text.endsWith(warningRuleInParentheses)
+      const ruleId = shouldOmitRuleId ? '' : chalk.dim(warningRuleInParentheses)
 
 			let symbol;
 			if (warning.severity === 'warning') {
 				symbol = logSymbols.warning;
 				warningCount++
 			} else if (warning.severity === 'error') {
-				symbol = logSymbols.error;
-				errorCount++
-				ruleText = chalk.red(`${warning.text}\n`)
-			}
+        symbol = logSymbols.error;
+        errorCount++
+        ruleText = chalk.red(`${warning.text}\n`)
+      }
 
 			const location = {
 				start: {
@@ -63,9 +65,9 @@ module.exports = function(results) {
 			}
 
 			return [
-				`  ${symbol} ${ruleText} ${ruleId}`,
-				`${codeFrameColumns(fileContent, location, { highlightCode: true })}` // TODO disable syntax error highlighting
-			].join('\n')
+        `  ${symbol} ${ruleText} ${ruleId}`.trimEnd(),
+        `${codeFrameColumns(fileContent, location, { highlightCode: true })}` // TODO disable syntax error highlighting
+      ].join('\n')
 		});
 
 		const filename = chalk.underline(path.relative('.', result.source));
