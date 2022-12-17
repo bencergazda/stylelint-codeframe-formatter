@@ -6,7 +6,9 @@
   "scripts": {
     "eslint": "eslint index.js",
     "test:cli": "stylelint --custom-formatter ./index.js ./tests/styles.css",
-    "test:webpack": "cd ./tests && webpack"
+    "test:webpack": "cd ./tests && webpack",
+    "test": "npm run test:cli && npm run test:webpack",
+    "install-and-test": "npm ci && npm test"
   },
   "author": "bencergazda",
   "license": "MIT",

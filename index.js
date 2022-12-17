@@ -53,7 +53,9 @@ module.exports = function(results) {
 				}
 			};
 
-			if (typeof warning.endColumn === 'number' && typeof warning.endLine === 'number') {
+			const shouldAddEndLocation =
+        typeof warning.endColumn === 'number' && typeof warning.endLine === 'number' && warning.endLine >= warning.line
+			if (shouldAddEndLocation) {
 				location.end = {
 					column: warning.endColumn,
 					line: warning.endLine
