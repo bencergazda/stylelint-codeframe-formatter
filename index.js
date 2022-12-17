@@ -31,11 +31,13 @@ module.exports = function(results) {
 
 		// Collecting Stylesheet errors
 		const fileContent = fs.readFileSync(result.source, 'utf8');
+		const filename = chalk.underline(path.relative('.', result.source))
 
 		const messagesOutput = result.warnings.map(function(warning) {
-			let ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
-			const isError = warning.severity === 'error'
 			const warningRuleInParentheses = `(${warning.rule})`
+			// warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
+			let ruleText = warning.text.substring(0, warning.text.indexOf(warningRuleInParentheses))
+			const isError = warning.severity === 'error'
 			const shouldOmitRuleId = isError && warning.text.endsWith(warningRuleInParentheses)
 			const ruleId = shouldOmitRuleId ? '' : chalk.dim(warningRuleInParentheses)
 
@@ -46,7 +48,7 @@ module.exports = function(results) {
 			} else if (warning.severity === 'error') {
 				symbol = logSymbols.error;
 				errorCount++
-				ruleText = chalk.red(`${warning.text}\n`)
+				ruleText = chalk.red(warning.text)
 			}
 
 			const location = {
@@ -64,14 +66,19 @@ module.exports = function(results) {
 					line: warning.endLine
 				};
 			}
+			const messageHeaderText = [
+				symbol,
+				ruleText,
+				ruleId,
+				'at',
+				`${filename}:${warning.line}:${warning.column}`
+			].filter(Boolean).join(' ')
 
 			return [
-				`  ${symbol} ${ruleText} ${ruleId}`.trimEnd(),
+				`  ${messageHeaderText}`,
 				`${codeFrameColumns(fileContent, location, { highlightCode: true })}` // TODO disable syntax error highlighting
 			].join('\n')
 		});
-
-		const filename = chalk.underline(path.relative('.', result.source));
 
 		if (messagesOutput.length) returnData += `  ${filename}\n\n${messagesOutput.join('\n\n')}`;
 
