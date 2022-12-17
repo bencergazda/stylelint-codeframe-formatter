@@ -34,8 +34,9 @@ module.exports = function(results) {
 
 		const messagesOutput = result.warnings.map(function(warning) {
 			let ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
+			const isError = warning.severity === 'error'
 			const warningRuleInParentheses = `(${warning.rule})`
-			const shouldOmitRuleId = warning.text.endsWith(warningRuleInParentheses)
+			const shouldOmitRuleId = isError && warning.text.endsWith(warningRuleInParentheses)
 			const ruleId = shouldOmitRuleId ? '' : chalk.dim(warningRuleInParentheses)
 
 			let symbol;
