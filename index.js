@@ -31,10 +31,15 @@ module.exports = function(results) {
 
 		// Collecting Stylesheet errors
 		const fileContent = fs.readFileSync(result.source, 'utf8');
+		const filename = chalk.underline(path.relative('.', result.source))
 
 		const messagesOutput = result.warnings.map(function(warning) {
-			let ruleText = warning.text.substring( 0, warning.text.indexOf( ' (' + warning.rule +  ')' ) ); // warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
-			const ruleId = chalk.dim(`(${warning.rule})`);
+			const warningRuleInParentheses = `(${warning.rule})`
+			// warning.rule is appended to warning.text (wrapped in parentheses). We remove it in case we need them separately.
+			let ruleText = warning.text.substring(0, warning.text.indexOf(warningRuleInParentheses))
+			const isError = warning.severity === 'error'
+			const shouldOmitRuleId = isError && warning.text.endsWith(warningRuleInParentheses)
+			const ruleId = shouldOmitRuleId ? '' : chalk.dim(warningRuleInParentheses)
 
 			let symbol;
 			if (warning.severity === 'warning') {
@@ -43,7 +48,7 @@ module.exports = function(results) {
 			} else if (warning.severity === 'error') {
 				symbol = logSymbols.error;
 				errorCount++
-				ruleText = chalk.red(`${warning.text}\n`)
+				ruleText = chalk.red(warning.text)
 			}
 
 			const location = {
@@ -53,20 +58,27 @@ module.exports = function(results) {
 				}
 			};
 
-			if (typeof warning.endColumn === 'number' && typeof warning.endLine === 'number') {
+			const shouldAddEndLocation =
+				typeof warning.endColumn === 'number' && typeof warning.endLine === 'number' && warning.endLine >= warning.line
+			if (shouldAddEndLocation) {
 				location.end = {
 					column: warning.endColumn,
 					line: warning.endLine
 				};
 			}
+			const messageHeaderText = [
+				symbol,
+				ruleText,
+				ruleId,
+				'at',
+				`${filename}:${warning.line}:${warning.column}`
+			].filter(Boolean).join(' ')
 
 			return [
-				`  ${symbol} ${ruleText} ${ruleId}`,
+				`  ${messageHeaderText}`,
 				`${codeFrameColumns(fileContent, location, { highlightCode: true })}` // TODO disable syntax error highlighting
 			].join('\n')
 		});
-
-		const filename = chalk.underline(path.relative('.', result.source));
 
 		if (messagesOutput.length) returnData += `  ${filename}\n\n${messagesOutput.join('\n\n')}`;
 

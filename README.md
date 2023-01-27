@@ -8,26 +8,25 @@
 
 ![](screenshot.png)
 
-
 ## Install
 
 ```console
-$ npm install stylelint-codeframe-formatter --save-dev
+npm install stylelint-codeframe-formatter --save-dev
 ```
 
 ## Usage
 
 ### Stylelint CLI
 
-```
-$ stylelint --custom-formatter stylelint-codeframe-formatter file.css
+```console
+stylelint --custom-formatter path/to/stylelint-codeframe-formatter file.css
 ```
 
 ### [stylelint-webpack-plugin](https://github.com/JaKXz/stylelint-webpack-plugin/)
 
-webpack.config.js
+`webpack.config.js`
 
-```
+```js
 module.exports = {
     plugins: [
         new StylelintPlugin({
@@ -41,9 +40,9 @@ module.exports = {
 
 ### [grunt-stylelint](https://github.com/wikimedia/grunt-stylelint/)
 
-Gruntfile.js
+`Gruntfile.js`
 
-```
+```js
 module.exports = function(grunt) {
     grunt.initConfig({
         stylelint: {
@@ -61,5 +60,6 @@ module.exports = function(grunt) {
 
 ## License
 
-MIT © [Benedek Káldi](http://bencergazda.hu)<br/>
+MIT © [Benedek Káldi](http://bencergazda.hu)
+
 Heavily based on [Adrien Antoine](https://adriantoine.com)'s [eslint-codeframe-formatter](https://github.com/adriantoine/eslint-codeframe-formatter)
