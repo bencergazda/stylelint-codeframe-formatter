@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/babel__code-frame": "^7.0.3",
     "css-loader": "^5.2.7",
-    "eslint": "^4.19.1",
+    "eslint": "^8.32.0",
     "style-loader": "^2.0.0",
     "stylelint": "^14.10.0",
     "stylelint-config-standard": "^29.0.0",
